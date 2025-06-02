@@ -78,6 +78,8 @@ def scrape_yelp(query, location, pages):
         st.info(f"Scraping page {page//10 + 1}...")
         params = {"find_desc": query, "find_loc": location, "start": page}
         res = requests.get(base_url, headers=HEADERS, params=params)
+        st.write(res.text[:5000])  # DEBUG: Show part of page
+
         soup = BeautifulSoup(res.text, "html.parser")
 
         for biz in soup.select("div.container__09f24__21w3G"):
